@@ -10,8 +10,8 @@ const app = express();
 
 //conectar db
 db.authenticate()
-    .then( () => console.log("conexion exitosa") )
-    .catch( (error) => console.log("Error en la conexion", error) );
+    .then( () => console.log("Databse connection successful") )
+    .catch( (error) => console.log("Connection error: ", error) );
 
 app.use(bodyParser.json());
 
@@ -20,9 +20,6 @@ const port = process.env.PORT || 3000;
 //Routes
 app.use("/user", userRoutes);
 app.use("/finances", financesRoutes);
-
-
-app.get('/', (req, res) => res.send("testing"))
 
 app.listen(port, () => {
     console.log(`Working on port ${port}`);
