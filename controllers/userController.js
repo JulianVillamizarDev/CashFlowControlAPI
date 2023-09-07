@@ -216,4 +216,3 @@ export {
     checkNewPasswordToken,
     newPassword
 }
-
