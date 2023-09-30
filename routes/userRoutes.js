@@ -7,7 +7,11 @@ import {
     profile,
     forgotPassword,
     checkNewPasswordToken,
-    newPassword
+    newPassword,
+    getUserByToken,
+    getUserById,
+    getUserByUsername,
+    getUserByEmail
 } from "../controllers/userController.js";
 import checkAuth from "../middleware/authMiddleware.js";
 
@@ -17,7 +21,7 @@ const router = express.Router();
 //---------PUBLIC ENDPOINTS---------
 
 //GET
-router.get("/users", usersList);//users list
+router.get("/", usersList);//users list
 router.get("/confirm/:token", confirmAccount);//user confirmation
 //POST
 router.post("/register", createUser);// user registration
@@ -31,6 +35,10 @@ router.route("/forgotPassword/:token").get( checkNewPasswordToken ).post( newPas
 
 //GET
 router.get("/profile", checkAuth, profile);
+router.get("/:id", getUserById);
+router.get("/token/:token", getUserByToken);
+router.get("/username/:username", getUserByUsername);
+router.get("/email/:username", getUserByUsername);
 
 
 export default router;

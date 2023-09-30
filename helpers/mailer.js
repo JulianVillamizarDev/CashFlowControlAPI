@@ -14,6 +14,7 @@ const sendConfirmationEmail = async (data) => {
 
     //send email
     const {username, email, token} = data
+    console.log(token);
 
     const info = await transporter.sendMail({
         from: "CashFlowControl",
@@ -22,7 +23,7 @@ const sendConfirmationEmail = async (data) => {
         text: "Verify your account",
         html: `<p>Welcome to CashFlowControl, ${username}!</p>
             <p>Please verify your account on the link below:</p>
-            <a href="${process.env.FRONTEND_URL}/confirm/${token}" target="_blank">click here to verify your account</a>
+            <a href="${process.env.FRONTEND_URL}/verify-account/${token}" target="_blank">click here to verify your account</a>
 
             <p>If you didn't create this account, please ignore this email.</p>
         `

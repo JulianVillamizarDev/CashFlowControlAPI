@@ -29,19 +29,19 @@ const User = db.define('users', {
     token: {
         type: Sequelize.STRING,
         unique: true,
+        allowNull: true
     },
     isConfirmed: {
-        type: Sequelize.TINYINT
+        type: Sequelize.TINYINT,
+        defaultValue: 0,
     }
 });
 
 //CREATE TOKEN
-if (User.token === 0) {
-    SequelizeTokenfy.tokenify(User, {
-        field: 'token',
-        length: 30
-    });
-}
+SequelizeTokenfy.tokenify(User, {
+    field: 'token',
+    length: 30
+});
 
 
 //HASH PASSWORD
