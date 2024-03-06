@@ -19,7 +19,7 @@ const app = express();
 const allowedDomains = [process.env.FRONTEND_URL, undefined];
 
 const corsOptions = {
-    origin: function(origin, callback){
+    origin: function(origin: any, callback: any){
         if(allowedDomains.indexOf(origin) !== -1){
             callback(null, true);
         }else{

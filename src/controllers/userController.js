@@ -319,6 +319,8 @@ export const newPassword = async (req, res) => {
     }
 }
 
+export const updateUserInfo = async (req, res) => {}
+
 //GET USER BY
 export const findBy = async (req, res) => {
     try {
