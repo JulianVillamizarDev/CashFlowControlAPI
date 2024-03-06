@@ -21,7 +21,7 @@ const sendConfirmationEmail = async (data) => {
         to: email,
         subject: "Verify your account",
         text: "Verify your account",
-        html: `<p>Welcome to CashFlowControl, ${username}!</p>
+        html: `<h1>Welcome to CashFlowControl, ${username}!</h1>
             <p>Please verify your account on the link below:</p>
             <a href="${process.env.FRONTEND_URL}/verify-account/${token}" target="_blank">click here to verify your account</a>
 
@@ -40,9 +40,9 @@ const sendNewPasswordEmail = async (data) => {
         to: email,
         subject: "Change password request",
         text: "You requested a change in your password",
-        html: `<p>Hi, ${username}!</p>
+        html: `<h1>Hi, ${username}!</h1>
             <p>Please change your password on the link below:</p>
-            <a href="${process.env.FRONTEND_URL}/forgotPassword/${token}" target="_blank">click here to verify your account</a>
+            <a href="${process.env.FRONTEND_URL}/change-password/${token}" target="_blank">click here to verify your account</a>
 
             <p>If you didn't request this change in your password, click the link and press the cancel button.</p>
         `

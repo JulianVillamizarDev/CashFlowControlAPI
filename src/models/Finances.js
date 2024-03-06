@@ -21,7 +21,7 @@ const Finances = db.define('finances', {
         type: Sequelize.DECIMAL(10, 2)
     },
     date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
     }
 });
 
