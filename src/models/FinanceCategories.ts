@@ -1,4 +1,4 @@
-import Sequelize from 'sequelize';
+import * as Sequelize from 'sequelize';
 import db from "../config/db.js";
 
 const FinanceCategories = db.define('finances_types_categories', {

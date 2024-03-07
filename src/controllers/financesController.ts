@@ -5,9 +5,10 @@ import db from "../config/db.js";
 import sequelize from "../config/db.js";
 import { QueryTypes } from "sequelize";
 import { parseToMMYYYY } from "../helpers/helpers.js";
+import { Request, Response } from "express";
 
 //FINANCES TYPES LIST
-export const financesTypesList = async (req, res) => {
+export const financesTypesList = async (req: Request, res: Response) => {
     try {
 
         const types = await FinanceTypes.findAll();
@@ -24,7 +25,7 @@ export const financesTypesList = async (req, res) => {
 }
 
 //FINANCES CATEGORIES LIST
-export const financesCategoriesList = async (req, res) => {
+export const financesCategoriesList = async (req: Request, res: Response) => {
     try {
         const { type } = req.params;
 
@@ -48,7 +49,7 @@ export const financesCategoriesList = async (req, res) => {
 
 //FINANCES LIST
 //Get List page by limit and offset
-export const getFinancePage = async (user_id, limit, offset) => {
+export const getFinancePage = async (user_id: number, limit: number, offset: number) => {
     const finance = await FinancesVW.findAll({
         where: {
             user_id
@@ -83,7 +84,7 @@ export const getFinancePage = async (user_id, limit, offset) => {
 }
 
 //Get list of finances and pages sorted in arrays
-export const financesList = async (req, res) => {
+export const financesList = async (req: Request, res: Response) => {
     try {
         const { user_id, limit } = req.body;
 
@@ -117,7 +118,7 @@ export const financesList = async (req, res) => {
 }
 
 //get full list
-export const getFullList = async (req, res) => {
+export const getFullList = async (req: Request, res: Response) => {
     const { user_id } = req.params
 
     try {
@@ -151,7 +152,7 @@ export const getFullList = async (req, res) => {
 }
 
 //CREATE FINANCE
-export const createFinance = async (req, res) => {
+export const createFinance = async (req: Request, res: Response) => {
     try {
         const { user, type_category, description, amount, date } = req.body;
 
@@ -174,7 +175,7 @@ export const createFinance = async (req, res) => {
 }
 
 // ----------------------GET FINANCES BY LAST X MONTHS----------------------
-export const getFinancesByMonths = async (req, res) => {
+export const getFinancesByMonths = async (req: Request, res: Response) => {
     try {
         const { user, type, interval, } = req.body;
 
@@ -209,9 +210,9 @@ export const getFinancesByMonths = async (req, res) => {
 
         const finances = await sequelize.query(query, { type: QueryTypes.SELECT });
 
-        let financesList = [];
+        let financesList: Array<any> = [];
 
-        finances.forEach((item) => {
+        finances.forEach((item: any) => {
             const date = parseToMMYYYY(item.month, item.year);
 
             if (type === 'all') {
@@ -238,7 +239,7 @@ export const getFinancesByMonths = async (req, res) => {
 }
 
 // ----------------GET FINANCES BY LAST X DAYS----------------
-export const getFinancesByDays = async (req, res) => {
+export const getFinancesByDays = async (req: Request, res: Response) => {
     try {
         const { user, type, interval, } = req.body;
 
@@ -274,7 +275,7 @@ export const getFinancesByDays = async (req, res) => {
 
         res.status(200).json({ data: finances });
 
-    } catch (error) {
+    } catch (error: any) {
         res.status(500).json({
             msg: error.message,
             error
@@ -283,7 +284,7 @@ export const getFinancesByDays = async (req, res) => {
 }
 
 //----------------GET FINANCES BALANCE BY LAST X DAYS----------------
-export const getBalancesByDays = async (req, res) => {
+export const getBalancesByDays = async (req: Request, res: Response) => {
 
     try {
         const { user, interval } = req.body;
@@ -304,7 +305,7 @@ export const getBalancesByDays = async (req, res) => {
 
         res.status(200).json({ data: balances });
 
-    } catch (error) {
+    } catch (error: any) {
         res.status(500).json({
             msg: error.message,
             error
@@ -313,7 +314,7 @@ export const getBalancesByDays = async (req, res) => {
 }
 
 //----------------GET FINANCES BALANCE BY LAST X DAYS----------------
-export const getBalancesByMonths = async (req, res) => {
+export const getBalancesByMonths = async (req: Request, res: Response) => {
 
     try {
         const { user, interval } = req.body;
@@ -333,9 +334,9 @@ export const getBalancesByMonths = async (req, res) => {
 
         const balances = await sequelize.query(query, { type: QueryTypes.SELECT });
 
-        let balancesList = [];
+        let balancesList: Array<any> = [];
 
-        balances.forEach((item) => {
+        balances.forEach((item: any) => {
             const date = parseToMMYYYY(item.month, item.year);
 
             balancesList.push({
@@ -346,7 +347,7 @@ export const getBalancesByMonths = async (req, res) => {
 
         res.status(200).json({ data: balancesList });
 
-    } catch (error) {
+    } catch (error: any) {
         res.status(500).json({
             msg: error.message,
             error

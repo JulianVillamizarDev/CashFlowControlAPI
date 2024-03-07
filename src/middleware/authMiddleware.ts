@@ -1,8 +1,9 @@
 import User from "../models/User.js";
 import { authSessionToken } from "../helpers/helpers.js";
+import { Request, Response } from "express";
 
 //middleware function to authorize the session token to login
-const checkAuth = async (req, res, next) => {
+const checkAuth = async (req: Request, res: Response, next: any) => {
     let token;
     if(req.headers.authorization && req.headers.authorization.startsWith("Bearer")){
         
@@ -21,13 +22,13 @@ const checkAuth = async (req, res, next) => {
                 ]
             });
 
-            req.user = {
+            req.body = {
                 authLogin: true,
                 user: user.dataValues
             };
 
             return next();
-        } catch (error) {
+        } catch (error: any) {
             //const e = new Error("Unvalid token");
             res.clearCookie("CFC_SESSION");
             return res.status(403).json({

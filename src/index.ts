@@ -49,7 +49,3 @@ app.use("/finances", financesRoutes);
 app.listen(port, () => {
     console.log(`Working on port ${port}`);
 });
-
-
-
-

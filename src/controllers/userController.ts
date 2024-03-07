@@ -5,9 +5,10 @@ import { sendConfirmationEmail, sendNewPasswordEmail } from "../helpers/mailer.j
 import { QueryTypes } from "sequelize";
 import sequelize from "../config/db.js";
 import { v4 as uuidv4 } from 'uuid';
+import { Request, Response } from "express";
 
 //--------------------USERS LIST--------------------
-export const usersList = async (req, res) => {
+export const usersList = async (req: Request, res: Response) => {
     try {
         const users = await User.findAll({
             attributes: ["username", "email"]
@@ -22,7 +23,7 @@ export const usersList = async (req, res) => {
 }
 //------------------USER REGISTRATION------------------
 
-export const createUser = async (req, res) => {
+export const createUser = async (req: Request, res: Response) => {
     try {
         const { username, email, password, firstname, lastname } = req.body;
         const id_user = createID();
@@ -68,7 +69,7 @@ export const createUser = async (req, res) => {
 }
 
 //-------------------------USER LOGIN-------------------------
-export const loginUser = async (req, res, next) => {
+export const loginUser = async (req: Request, res: Response, next: any) => {
     try {
         const { email, password } = req.body;
 
@@ -147,7 +148,7 @@ export const loginUser = async (req, res, next) => {
 }
 
 //-----------------------CREATE COOKIE WITH USER SESSION-----------------------
-export const setSessionCookie = async (req, res) => {
+export const setSessionCookie = async (req: Request, res: Response) => {
     const session = req.params;
     res.cookie("CFC_SESSION", session.session, {
         httpOnly: true,
@@ -158,13 +159,13 @@ export const setSessionCookie = async (req, res) => {
 }
 
 //-----------------------SEND SESSION COOKIE-----------------------
-export const getSessionCookie = async (req, res) => {
+export const getSessionCookie = async (req: Request, res: Response) => {
 
     res.status(200).json({ session: req.cookies });
 }
 
 //-------------------------CONFIRM ACCOUNT-------------------------
-export const confirmAccount = async (req, res) => {
+export const confirmAccount = async (req: Request, res: Response) => {
     try {
         const token = req.params.token;
         //find user
@@ -202,14 +203,14 @@ export const confirmAccount = async (req, res) => {
 }
 
 //------------------Return user from middleware------------------
-export const profile = (req, res) => {
-    const { user } = req;
+export const profile = (req: Request, res: Response) => {
+    const { user } = req.body;
     res.json(user);
 }
 
 //-------------------------FORGOT PASSWORD-------------------------
 
-export const forgotPassword = async (req, res) => {
+export const forgotPassword = async (req: Request, res: Response) => {
     const { email } = req.body;
 
     try {
@@ -247,7 +248,7 @@ export const forgotPassword = async (req, res) => {
     }
 };
 
-export const checkNewPasswordToken = async (req, res) => {
+export const checkNewPasswordToken = async (req: Request, res: Response) => {
     const { token } = req.params;
     try {
         const user = await User.findOne({ where: { token } });
@@ -278,7 +279,7 @@ export const checkNewPasswordToken = async (req, res) => {
     }
 }
 
-export const newPassword = async (req, res) => {
+export const newPassword = async (req: Request, res: Response) => {
     const { token } = req.params;
     const { newPassword } = req.body;
     try {
@@ -319,10 +320,10 @@ export const newPassword = async (req, res) => {
     }
 }
 
-export const updateUserInfo = async (req, res) => {}
+export const updateUserInfo = async (req: Request, res: Response) => {}
 
 //GET USER BY
-export const findBy = async (req, res) => {
+export const findBy = async (req: Request, res: Response) => {
     try {
         const query = req.query;
 
