@@ -1,58 +1,45 @@
-import Sequelize from 'sequelize';
-import db from "../config/db.js";
+import { DataTypes, Model } from 'sequelize';
+import { sequelize } from "../config/db.js";
 
-const Finances = db.define('finances', {
+class Finances extends Model {
+    declare id_finance: number;
+    declare user: string;
+    declare category: number;
+    declare description: string;
+    declare amount: number;
+    declare date: string;
+}
+
+Finances.init({
     id_finance: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
+        allowNull: false,
         autoIncrement: true,
-        unique: true
     },
     user: {
-        type: Sequelize.INTEGER
+        type: DataTypes.STRING(45),
+        allowNull: false,
     },
-    type_category: {
-        type: Sequelize.INTEGER
-    },
-    description: {
-        type: Sequelize.STRING
-    },
-    amount: {
-        type: Sequelize.DECIMAL(10, 2)
-    },
-    date: {
-        type: Sequelize.DATEONLY
-    }
-});
-
-const FinancesVW = db.define('vw_finances', {
-    id_finance: {
-        type: Sequelize.INTEGER,
-        primaryKey: true
-    },
-    user_id: {
-        type: Sequelize.INTEGER
-    },
-    username: {
-        type: Sequelize.STRING
-    },
-    finance_type: {
-        type: Sequelize.STRING
-    },
-    finance_category: {
-        type: Sequelize.STRING
+    category: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     },
     description: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING(128),
+        allowNull: true
     },
     amount: {
-        type: Sequelize.DECIMAL(10,2)
+        type: DataTypes.FLOAT,
+        allowNull: true,
     },
     date: {
-        type: Sequelize.STRING
+        type: DataTypes.DATE,
+        allowNull: false,
     }
-
+}, {
+    tableName: 'finances',
+    sequelize,
 });
 
-
-export  {Finances, FinancesVW};
+export default Finances;

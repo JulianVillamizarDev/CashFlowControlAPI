@@ -1,9 +1,9 @@
-import User from "../models/User.js";
-import UserSessions from "../models/UsersSessions.js";
-import { createID, generateJWT } from "../helpers/helpers.js";
-import { sendConfirmationEmail, sendNewPasswordEmail } from "../helpers/mailer.js";
+import User from "../../models/User.js";
+import UserSessions from "../../models/UsersSessions.js";
+import { createID, generateJWT } from "../../helpers/helpers.js";
+import { sendConfirmationEmail, sendNewPasswordEmail } from "../../helpers/mailer.js";
 import { QueryTypes } from "sequelize";
-import sequelize from "../config/db.js";
+import sequelize from "../../config/db.js";
 import { v4 as uuidv4 } from 'uuid';
 import { Request, Response } from "express";
 

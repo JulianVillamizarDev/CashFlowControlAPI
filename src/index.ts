@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cors from "cors";
-import db from "./config/db.js";
+import { sequelize } from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import financesRoutes from "./routes/financesRoutes.js";
 import cookieParser from "cookie-parser";

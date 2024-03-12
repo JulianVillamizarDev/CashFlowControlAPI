@@ -1,33 +1,22 @@
-import Sequelize from 'sequelize';
-import dotenv from "dotenv";
+import { Sequelize } from 'sequelize';
 
+const DB = process.env.DB || '';
+const USER = process.env.DB_USER || '';
+const PASSWORD = process.env.DB_PASSWORD || '';
+const HOST = process.env.DB_HOST || '';
+const PORT = Number(process.env.DB_PORT);
 
-dotenv.config();
-
-// const sequelize = new Sequelize(
-//     process.env.MYSQL_ADDON_DB, 
-//     process.env.MYSQL_ADDON_USER, 
-//     process.env.MYSQL_ADDON_PASSWORD, 
-//     {
-//   host: process.env.MYSQL_ADDON_HOST,
-//   dialect: 'mysql',
-//   define: {
-//     timestamps: false
-//   },
-//   pool: {
-//     max: 5,
-//     min: 0,
-//     acquire: 30000,
-//     idle: 10000
-//   },
-//   operatorsAliases: false
-// });
-const sequelize = new Sequelize(process.env.MYSQL_URL, {
+export const sequelize = new Sequelize(
+  DB, 
+  USER, 
+  PASSWORD, 
+  {
+    port: PORT,
+    host: HOST,
+    dialect: 'mysql',
     define: {
-        timestamps: false
-    }
+      timestamps: false
+  },
 });
-
-export default sequelize;
 
 

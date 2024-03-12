@@ -1,32 +1,23 @@
-import * as Sequelize from 'sequelize';
-import db from "../config/db.js";
+import { DataTypes, Model } from 'sequelize';
+import { sequelize } from "../config/db.js";
 
-const FinanceCategories = db.define('finances_types_categories', {
-    id_finances_types_categories: {
-        type: Sequelize.INTEGER,
-        primaryKey: true, 
-        unique: true
-    },
-    finance_type: {
-        type: Sequelize.INTEGER
-    },
-    category_name: {
-        type: Sequelize.STRING,
-    }
-});
+class FinanceCategories extends Model {
+    declare id_finance_categories: number;
+    declare finance_type: number;
+    declare category: string;
+}
 
-const FinanceCategoriesVW = db.define('vw_finance_categories', {
-    id_finances_types_categories: {
-        type: Sequelize.INTEGER,
-        primaryKey: true, 
-        unique: true
-    },
-    type_name: {
-        type: Sequelize.STRING
-    },
-    category_name: {
-        type: Sequelize.STRING,
-    }
-});
+FinanceCategories.init({
+ id_finance_categories: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
+ },
+ 
+}, {
+    tableName: 'finance_categories',
+    sequelize,
+})
 
-export {FinanceCategories, FinanceCategoriesVW};
+export default FinanceCategories;

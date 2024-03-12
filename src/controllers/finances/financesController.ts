@@ -1,10 +1,10 @@
-import { Finances, FinancesVW } from "../models/Finances.js";
-import FinanceTypes from "../models/FinanceTypes.js";
-import { FinanceCategoriesVW } from "../models/FinanceCategories.js";
-import db from "../config/db.js";
-import sequelize from "../config/db.js";
+import { Finances, FinancesVW } from "../../models/Finances.js";
+import FinanceTypes from "../../models/FinanceTypes.js";
+import { FinanceCategoriesVW } from "../../models/FinanceCategories.js";
+import db from "../../config/db.js";
+import sequelize from "../../config/db.js";
 import { QueryTypes } from "sequelize";
-import { parseToMMYYYY } from "../helpers/helpers.js";
+import { parseToMMYYYY } from "../../helpers/helpers.js";
 import { Request, Response } from "express";
 
 //FINANCES TYPES LIST
